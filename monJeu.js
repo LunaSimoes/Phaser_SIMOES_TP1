@@ -10,6 +10,7 @@ physics: {
         }
     },
 scene: {
+		init: init,
 		preload: preload,
 		create: create,
 		update: update
@@ -18,13 +19,15 @@ scene: {
 
 var game = new Phaser.Game(config);
 var score = 0;
-var platforms;
-var player;
-var cursors; 
-var stars;
-var scoreText;
-var bomb;
 
+function init(){
+ 	var platforms;
+	var player;
+	var cursors; 
+	var stars;
+	var scoreText;
+	var bomb;
+}
 
 function preload(){
 	this.load.image('background','assets/sky.png');	
@@ -32,7 +35,7 @@ function preload(){
 	this.load.image('etoile','assets/star.png');
 	this.load.image('sol','assets/platform.png');
 	this.load.image('bomb','assets/bomb.png');
-	this.load.spritesheet('perso','assets/blabla.png',{frameWidth: 32, frameHeight: 48});
+	this.load.spritesheet('perso','assets/dude.png',{frameWidth: 31, frameHeight: 22});
 }
 
 
@@ -84,10 +87,13 @@ function create(){
 
 
 function update(){
+	
+	player.body.velocity.x = 0;
+	
 	if(cursors.left.isDown){
 		player.anims.play('left', true);
 		player.setVelocityX(-300);
-		player.setFlipX(false);
+		player.setFlipX(true);
 	}else if(cursors.right.isDown){
 		player.setVelocityX(300);
 		player.anims.play('left', true);
